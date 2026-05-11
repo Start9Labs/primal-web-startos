@@ -1,0 +1,4 @@
+[submodule "primal-web-app"]
+	path = primal-web-app
+	url = https://github.com/PrimalHQ/primal-web-app.git
+	branch = main
