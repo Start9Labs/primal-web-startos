@@ -31,11 +31,11 @@
 
 ## Image and Container Runtime
 
-| Property      | Value                                                              |
-| ------------- | ------------------------------------------------------------------ |
+| Property      | Value                                                             |
+| ------------- | ----------------------------------------------------------------- |
 | Image         | Locally built from `Dockerfile` (multi-stage: node build → nginx) |
-| Architectures | x86_64, aarch64                                                    |
-| Command       | `nginx -g 'daemon off;'`                                           |
+| Architectures | x86_64, aarch64                                                   |
+| Command       | `nginx -g 'daemon off;'`                                          |
 
 The build stage uses `node:20-bookworm-slim` to compile the SPA from the `primal-web-app/` submodule. The runtime stage is `nginx:1.27-alpine` serving the static `dist/` over HTTP on port 80.
 
@@ -43,9 +43,9 @@ The build stage uses `node:20-bookworm-slim` to compile the SPA from the `primal
 
 ## Volume and Data Layout
 
-| Volume | Mount Point | Purpose                                              |
-| ------ | ----------- | ---------------------------------------------------- |
-| `main` | `/data`     | Reserved; the SPA is fully stateless on the server.  |
+| Volume | Mount Point | Purpose                                             |
+| ------ | ----------- | --------------------------------------------------- |
+| `main` | `/data`     | Reserved; the SPA is fully stateless on the server. |
 
 The web app holds all user state (keys, follows, settings) inside the browser. Nothing is persisted server-side by this package.
 
@@ -53,7 +53,7 @@ The web app holds all user state (keys, follows, settings) inside the browser. N
 
 ## Installation and First-Run Flow
 
-No special setup. Install and start — open the Web UI and either generate a new Nostr keypair or import an existing `nsec` / NIP-07 extension.
+No special setup. Install and start — open the Web UI and either create a new Nostr account, import an existing `nsec`, or connect a NIP-07 browser extension. Sign-in happens entirely in your browser; nothing is stored server-side.
 
 ---
 
@@ -65,9 +65,9 @@ No user-facing configuration is exposed by StartOS. The Primal cache, upload, an
 
 ## Network Access and Interfaces
 
-| Interface | Port | Protocol | Purpose         |
-| --------- | ---- | -------- | --------------- |
-| Web UI    | 80   | HTTP     | Primal web app  |
+| Interface | Port | Protocol | Purpose        |
+| --------- | ---- | -------- | -------------- |
+| Web UI    | 80   | HTTP     | Primal web app |
 
 **Access methods:**
 
@@ -118,7 +118,7 @@ None.
 
 ## What Is Unchanged from Upstream
 
-The web app source is the unmodified `v0.77.19` tag of `PrimalHQ/primal-web-app`. Only the build / serve plumbing (Dockerfile, nginx config) is added by this package.
+The web app source is an unmodified commit of `PrimalHQ/primal-web-app`'s `main` branch (upstream stopped publishing git tags after `v0.77.19`). Only the build / serve plumbing (Dockerfile, nginx config) is added by this package.
 
 ---
 
@@ -141,5 +141,5 @@ ports:
 dependencies: none
 startos_managed_env_vars: none
 actions: none
-upstream_submodule: primal-web-app/ @ v0.77.19
+upstream_submodule: primal-web-app/ @ main (version 3.0.101)
 ```
