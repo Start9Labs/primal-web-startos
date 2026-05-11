@@ -15,3 +15,5 @@
 2. Read the new `primal-web-app/package.json` `version` (e.g. `3.0.102`). That's the StartOS version base; the package revision is the `:N` suffix.
 3. Rename the existing `startos/versions/v*.ts` file to the new version, update its `version` string and exported const name, and write `releaseNotes`. Update the import + `current` in `startos/versions/index.ts`. No new version file and no migration unless there's actual migration logic (there isn't — the SPA is server-side stateless) or you want to preserve the prior release notes in git.
 4. `git add primal-web-app startos/versions` and commit; PR.
+
+`icon.svg` and `LICENSE` are plain copies (of `primal-web-app/src/assets/icons/logo.svg` and `primal-web-app/LICENSE`), not symlinks — GitHub won't render a symlinked `<img>` in the README. If upstream changes its logo on a bump, refresh `icon.svg` by hand.
