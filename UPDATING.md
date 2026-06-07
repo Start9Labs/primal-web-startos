@@ -23,3 +23,9 @@ Upstream does **not** cut GitHub Releases, and the git tags lag far behind `main
   cd primal-web-app && git fetch origin && git checkout origin/main
   cd .. && git add primal-web-app
   ```
+
+## Temporary Stripe.js patch
+
+The `Dockerfile` carries a `sed` patch that disables loading Stripe.js from `js.stripe.com` (Primal's hosted card-payment flow, not meaningful on a self-hosted instance). It switches the Premium page to `@stripe/stripe-js/pure` and gates the `loadStripe()` call behind `PRIMAL_ENABLE_STRIPE`, then sets `PRIMAL_ENABLE_STRIPE=false` in `.env`. The `grep` guard fails the build loudly if upstream moves the patched lines.
+
+This mirrors upstream PR [PrimalHQ/primal-web-app#196](https://github.com/PrimalHQ/primal-web-app/pull/196). **When a bump pulls in that merged commit, delete the `sed` block from the `Dockerfile`** — the `PRIMAL_ENABLE_STRIPE=false` line then drives the upstream flag on its own. (If the PR is rejected/superseded, keep the patch but re-check the `sed` targets against the new source.)
