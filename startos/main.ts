@@ -6,7 +6,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
   console.info(i18n('Starting Primal!'))
 
   return sdk.Daemons.of(effects).addDaemon('primary', {
-    subcontainer: await sdk.SubContainer.of(
+    subcontainer: sdk.SubContainer.of(
       effects,
       { imageId: 'main' },
       sdk.Mounts.of().mountVolume({
