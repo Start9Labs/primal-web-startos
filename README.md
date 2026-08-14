@@ -141,5 +141,5 @@ ports:
 dependencies: none
 startos_managed_env_vars: none
 actions: none
-upstream_submodule: primal-web-app/ @ main (version 3.0.101)
+upstream_submodule: primal-web-app/ @ main
 ```
