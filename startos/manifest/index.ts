@@ -9,7 +9,6 @@ export const manifest = setupManifest({
   upstreamRepo: 'https://github.com/PrimalHQ/primal-web-app',
   marketingUrl: 'https://primal.net/',
   donationUrl: 'https://primal.net/',
-  docsUrls: ['https://github.com/PrimalHQ/primal-web-app/blob/main/README.md'],
   description: { short, long },
   volumes: ['main'],
   images: {
