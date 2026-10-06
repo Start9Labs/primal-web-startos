@@ -18,14 +18,22 @@ Freshly scaffolded? Work the
 guide page, not a file in this repo — read it, don't copy it in.
 
 Keep `README.md` (technical reference for an AI support or administering agent) and
-`instructions.md` (end-user docs) in sync with your changes.
+`instructions.md` (end-user docs) in sync with your changes. This file restates neither:
+whoever changes the package has both, so it carries only what they don't — repo mechanics,
+a change that looks right and is not, where the next thing gets added, a naming trap, a
+build or test invocation particular to this repo.
 
-**Bugs and feature requests are GitHub issues on this repo** — file them as you find them.
+**Fix a defect you spot rather than reporting it** — you have the package open and the
+context to be sure. File **a GitHub issue on this repo** only when the call isn't yours to
+make: you can't pin the cause down, two defensible fixes exist, or it's too large to ride on
+the work in hand. An open issue is a report, not a queue — implement one when you're asked
+to or when it's labelled `Approved`, then close it with `Closes #<n>`.
+
 Don't record work in the repo instead: no `TODO.md`, no `NOTES.md`, no `PLAN.md`. What you
 verified, tried, and decided belongs in the commit message and the PR body.
 
 ## This repo
 
 - **Clone with `--recurse-submodules`.** The app lives in the `primal-web-app/` submodule; without it the build has nothing to compile.
-- **`gzip_proxied any` is load-bearing.** Requests arrive through StartOS's reverse proxy carrying a `Via` header, and nginx skips compression for proxied requests by default — without it the whole app ships uncompressed.
-- **The `main` volume is mounted but unused.** Primal is a pure SPA with no server-side state; don't invent a store for it.
+- **Keep `gzip_proxied any` in `nginx.conf`** — StartOS's proxy adds a `Via` header, and without it nginx serves the whole app uncompressed.
+- **Don't add a store or file model for the `main` volume** — Primal keeps no server-side state.
